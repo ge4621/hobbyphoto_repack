@@ -45,13 +45,12 @@ public class ShopController {
 	
 	@RequestMapping("pro.list")
 	public String selectProdcutList(Model model) {
-		ArrayList<Product> list = sService.selectProductList();
+//		ArrayList<Product> list = sService.selectProductList();
+//		System.out.println(list);
+//		model.addAttribute("list",list);
+//		return "shop/shopMain";
 		
-		//System.out.println(list);
-		
-		model.addAttribute("list",list);
-		
-		return "shop/shopMain";
+		return "chat/chatDetailView";
 	}
 	
 	@RequestMapping("detail.pro")
