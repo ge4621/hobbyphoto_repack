@@ -29,6 +29,7 @@
 	<context:component-scan base-package="com.kh.hobbyphoto" />
 	
 	<!-- websocket handler -->
+	<!-- handshake-interceptors는 로그인한 유저의 아이디를 얻기 위함 -->
 	
 	<beans:bean id="myHandler" class="com.kh.hobbyphoto.common.socket.EchoHandler" />
 	<websocket:handlers>
@@ -37,6 +38,16 @@
 	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 	      </websocket:handshake-interceptors>
 		<websocket:sockjs websocket-enabled="true"/>
+	</websocket:handlers>
+	
+	
+	<beans:bean id="Handler" class="com.kh.hobbyphoto.common.socket.WebSockHandler" />
+	<websocket:handlers>
+		<websocket:mapping handler="Handler" path="/echo" />
+		<websocket:handshake-interceptors>
+	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	      </websocket:handshake-interceptors>
+		<websocket:sockjs/>
 	</websocket:handlers>
 	
 </beans:beans>
