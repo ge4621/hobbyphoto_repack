@@ -38,7 +38,7 @@
 		$('#msg').val('')
 	});
 	
-	var sock = new SockJS('http://localhost:8006/echo');
+	var sock = new SockJS('http://localhost:8006/hobbyphoto/chat');
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 	sock.onopen = onOpen;

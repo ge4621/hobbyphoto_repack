@@ -43,11 +43,11 @@
 	
 	<beans:bean id="Handler" class="com.kh.hobbyphoto.common.socket.WebSockHandler" />
 	<websocket:handlers>
-		<websocket:mapping handler="Handler" path="/echo" />
+		<websocket:mapping handler="Handler" path="/chat" />
 		<websocket:handshake-interceptors>
 	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 	      </websocket:handshake-interceptors>
-		<websocket:sockjs/>
+		<websocket:sockjs websocket-enabled="true"/>
 	</websocket:handlers>
 	
 </beans:beans>
