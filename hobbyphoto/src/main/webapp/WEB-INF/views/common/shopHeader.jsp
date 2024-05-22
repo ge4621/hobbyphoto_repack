@@ -206,6 +206,9 @@
   </style>
 
 </head>
+
+
+
 <body>
 
 	
@@ -227,7 +230,7 @@
                     <li><a href="pro.list">카메라</a></li>
                     <li><a href="shop.photo">포토북</a></li>
                     <!-- <li><a href="shList.no">공지사항</a></li> -->
-                    <li><a href="echo">채팅</a></li>
+                    <li><a href="chat">채팅</a></li>
                 </ul>
             </div>
         </div>

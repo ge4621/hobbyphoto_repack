@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 웹 소켓 라이브러리 -->
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <!-- jQuery 라이브러리 -->
@@ -60,11 +61,11 @@
 			console.log('arr[' + i + ']: ' + arr[i]);
 		}
 		
-		var cur_session = '${userid}'; //현재 세션에 로그인 한 사람
+		var cur_session = '${userid.userId}'; //현재 세션에 로그인 한 사람
 		console.log("cur_session : " + cur_session);
 		
-		sessionId = arr[0];
-		message = arr[1];
+		message = arr[0];
+		sessionId = arr[1];
 		
 	    //로그인 한 클라이언트와 타 클라이언트를 분류하기 위함
 		if(sessionId == cur_session){
@@ -90,7 +91,7 @@
 	//채팅창에서 나갔을 때
 	function onClose(evt) {
 		
-		var user = '${pr.username}';
+		var user = '${userid.userId}';
 		var str = user + " 님이 퇴장하셨습니다.";
 		
 		$("#msgArea").append(str);
@@ -98,7 +99,7 @@
 	//채팅창에 들어왔을 때
 	function onOpen(evt) {
 		
-		var user = '${pr.username}';
+		var user = '${userid.userId}';
 		var str = user + "님이 입장하셨습니다.";
 		
 		$("#messageArea").append(str);
