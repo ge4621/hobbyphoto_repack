@@ -26,7 +26,7 @@
 
 <body>
 
-<div class="start">
+<div class="start" data-userid="${userid.userId}">
     <input type="text" id="msg">
     <input type="button" id="sendbtn" value="submit">
     <div id="messageArea"></div>
@@ -44,54 +44,43 @@
 	sock.onclose = onClose;
 	sock.onopen = onOpen;
 	
+	// 세션 ID 가져오기
+    var cur_session = $('.start').data('userid');
+	
 	//메시지전송
 	function sendMessage() {
-		sock.send($("#msg").val());
+		var message = $("#msg").val();
+        var data = cur_session + ":" + message; // 세션 ID와 메시지를 함께 전송
+        sock.send(data);
 	}
-	//서버에서 메시지를 받았을 때
-	function onMessage(msg) {
-		
-		var data = msg.data;
-		var sessionId = null; //데이터를 보낸 사람
-		var message = null;
-		
-		var arr = data.split(":");
-		
-		for(var i=0; i<arr.length; i++){
-			console.log('arr[' + i + ']: ' + arr[i]);
-		}
-		
-		var cur_session = '${userid.userId}'; //현재 세션에 로그인 한 사람
-		console.log("cur_session : " + cur_session);
-		
-		message = arr[0];
-		sessionId = arr[1];
-		
-	    //로그인 한 클라이언트와 타 클라이언트를 분류하기 위함
-		if(sessionId == cur_session){
-			
-			var str = "<div class='col-6'>";
-			str += "<div class='alert alert-secondary'>";
-			str += "<b>" + sessionId + " : " + message + "</b>";
-			str += "</div></div>";
-			
-			$("#messageArea").append(str);
-		}
-		else{
-			
-			var str = "<div class='col-6'>";
-			str += "<div class='alert alert-warning'>";
-			str += "<b>" + sessionId + " : " + message + "</b>";
-			str += "</div></div>";
-			
-			$("#messageArea").append(str);
-		}
-		
-	}
+	// 서버에서 메시지를 받았을 때
+    function onMessage(msg) {
+        var data = msg.data;
+        var arr = data.split(":");
+
+        if (arr.length >= 2) {
+            var sessionId = arr[0];
+            var message = arr[1];
+
+            // 로그인 한 클라이언트와 타 클라이언트를 분류하기 위함
+            var str = "<div class='col-6'>";
+            if (sessionId === cur_session) {
+                str += "<div class='alert alert-secondary'>";
+                str += "<b>" + sessionId + " : " + message + "</b>";
+            } else {
+                str += "<div class='alert alert-warning'>";
+                str += "<b>" + sessionId + " : " + message + "</b>";
+            }
+            str += "</div></div>";
+            $("#messageArea").append(str);
+        } else {
+            console.log("Invalid message format");
+        }
+    }
 	//채팅창에서 나갔을 때
 	function onClose(evt) {
 		
-		var user = '${userid.userId}';
+		var user = cur_session;
 		var str = user + " 님이 퇴장하셨습니다.";
 		
 		$("#msgArea").append(str);
@@ -99,7 +88,7 @@
 	//채팅창에 들어왔을 때
 	function onOpen(evt) {
 		
-		var user = '${userid.userId}';
+		var user = cur_session;
 		var str = user + "님이 입장하셨습니다.";
 		
 		$("#messageArea").append(str);

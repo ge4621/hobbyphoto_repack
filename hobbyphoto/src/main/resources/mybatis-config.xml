@@ -29,6 +29,7 @@
     	<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Templates" alias="Templates"/>
     	<typeAlias type="com.kh.hobbyphoto.shop.model.vo.Photo" alias="Photo"/>
     	<typeAlias type="com.kh.hobbyphoto.shop.model.vo.PhotoDetail" alias="PhotoDetail"/>
+    	<typeAlias type="com.kh.hobbyphoto.common.model.vo.Chat" alias="Chat"/>
 	</typeAliases>
 
 
@@ -41,5 +42,6 @@
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/notice-mapper.xml"/>
 		<mapper resource="/mappers/alarm-mapper.xml"/>
+		<mapper resource="/mappers/chat-mapper.xml"/>
 	</mappers>
 </configuration>
