@@ -18,7 +18,32 @@
         height: 600px;
         width: 600px;
         margin: auto;
+        margin-top: 50px;
+    }
 
+    .msg{
+        border: 1px solid black;
+        width: 300px;
+        height: 25px;
+    }
+
+    .sendbtn{
+        border: 1px solid orange;
+        width: 50px;
+        height: 20px;
+    }
+
+    .warp{
+        border: 1px solid black;
+        margin-bottom: 0px;
+    }
+
+    .messageArea{
+        width: 500px;
+        height: 560px;
+        overflow-y: auto;
+        margin: auto;
+        margin-top: 10px;
     }
 </style>
 
@@ -27,9 +52,14 @@
 <body>
 
 <div class="start" data-userid="${userid.userId}">
-    <input type="text" id="msg">
-    <input type="button" id="sendbtn" value="submit">
-    <div id="messageArea"></div>
+
+    <div id="messageArea" class="messageArea"></div>
+
+    <div class="warp">
+        <input type="text" id="msg" class="msg">
+        <input type="button" id="sendbtn" value="submit" class="sendbtn">
+    </div>
+
 </div>
 
 <script type="text/javascript">
